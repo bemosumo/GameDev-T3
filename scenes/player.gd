@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 
 	velocity.x = direction * current_speed
-	
+
 	if not is_on_floor():
 		if velocity.y < 0:
 			sprite.texture = tex_jump
