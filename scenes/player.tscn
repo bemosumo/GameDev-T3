@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3sayjvukgrof"]
 
 [ext_resource type="Texture2D" uid="uid://j2wrs40clo4m" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_idle.png" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://dy0gtownmaref" path="res://scenes/Player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://dy0gtownmaref" path="res://Player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://kq0oecj1vdoi" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_skid.png" id="2_sweqy"]
 [ext_resource type="Texture2D" uid="uid://c6ab5usovtwvg" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_jump.png" id="3_sweqy"]
 [ext_resource type="Texture2D" uid="uid://dvvkmshl5im4i" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_fall.png" id="4_2hs0m"]
