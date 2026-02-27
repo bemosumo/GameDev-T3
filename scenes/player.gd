@@ -64,11 +64,10 @@ func _physics_process(delta: float) -> void:
 		if is_dashing:
 			sprite.texture = tex_dash
 			
-			# Logika pencerminan terbalik khusus untuk dash
-			if direction == -1: # Jika dash ke kiri
-				sprite.flip_h = false # Gambar menghadap kanan
-			elif direction == 1: # Jika dash ke kanan
-				sprite.flip_h = true # Gambar menghadap kiri
+			if direction == -1:
+				sprite.flip_h = false
+			elif direction == 1:
+				sprite.flip_h = true
 				
 		elif is_crouching:
 			sprite.texture = tex_duck
