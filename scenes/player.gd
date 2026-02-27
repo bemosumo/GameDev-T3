@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var gravity: float = 800.0 
+@export var gravity: float = 800.0
 @export var walk_speed: float = 200.0
 @export var jump_speed: float = -400.0
 
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 				sprite.flip_h = false
 			elif direction == 1:
 				sprite.flip_h = true
-				
+
 		elif is_crouching:
 			sprite.texture = tex_duck
 		else:
