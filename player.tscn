@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://3sayjvukgrof"]
+
+[ext_resource type="Texture2D" uid="uid://j2wrs40clo4m" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_idle.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dy0gtownmaref" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://kq0oecj1vdoi" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_skid.png" id="2_sweqy"]
+[ext_resource type="Texture2D" uid="uid://c6ab5usovtwvg" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_jump.png" id="3_sweqy"]
+[ext_resource type="Texture2D" uid="uid://dvvkmshl5im4i" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_fall.png" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://dgvfedh1teejy" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_duck.png" id="5_1jxqw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dw050"]
+load_path = "res://.godot/imported/zombie_idle.png-cc1a0cf7d9076b9247707b3085666630.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(68, 96)
+
+[node name="Player" type="CharacterBody2D" unique_id=992372562]
+script = ExtResource("1_onrkg")
+tex_stand = ExtResource("1_4flbx")
+tex_jump = ExtResource("3_sweqy")
+tex_fall = ExtResource("4_2hs0m")
+tex_duck = ExtResource("5_1jxqw")
+tex_dash = ExtResource("2_sweqy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1574733379]
+texture = SubResource("CompressedTexture2D_dw050")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=67769766]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_onrkg")
