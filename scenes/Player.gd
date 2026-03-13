@@ -11,12 +11,13 @@ var is_crouching: bool = false
 @export var dash_multiplier: float = 2.0
 var is_dashing: bool = false
 
-var was_on_wall: bool = false 
+var was_on_wall: bool = false
 
 @onready var animplayer = $Sprite2D
-@onready var jump_sfx = $jump      
-@onready var land_sfx = $land  
+@onready var jump_sfx = $jump
+@onready var land_sfx = $land
 @onready var wall_sfx = $bump
+
 
 func _get_input():
 	if Input.is_action_just_pressed("ui_up") and jump_count < max_jumps:
@@ -24,7 +25,7 @@ func _get_input():
 		jump_count += 1
 		is_crouching = false
 		land_sfx.stop()
-		jump_sfx.play() 
+		jump_sfx.play()
 
 	if Input.is_action_just_released("ui_up"):
 		land_sfx.play()
@@ -43,10 +44,10 @@ func _get_input():
 
 	if direction:
 		velocity.x = direction * current_speed
-		
+
 		if not is_crouching and not is_dashing:
 			animation = "walk right"
-			
+
 		if direction > 0:
 			animplayer.flip_h = false
 		else:
@@ -80,7 +81,7 @@ func _get_input():
 func _physics_process(delta: float) -> void:
 	velocity.y += delta * GRAVITY
 	_get_input()
-	
+
 	move_and_slide()
 
 	if is_on_floor():
@@ -88,5 +89,5 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_wall() and not was_on_wall:
 		wall_sfx.play()
-		
+
 	was_on_wall = is_on_wall()
