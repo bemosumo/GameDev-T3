@@ -1,77 +1,92 @@
 extends CharacterBody2D
 
-@export var gravity: float = 800.0
-@export var walk_speed: float = 200.0
-@export var jump_speed: float = -400.0
-
-@export var tex_stand: Texture2D
-@export var tex_jump: Texture2D
-@export var tex_fall: Texture2D
-@export var tex_duck: Texture2D
-@export var tex_dash: Texture2D
+@export var SPEED := 200.0
+@export var JUMP_SPEED := -400.0
+@export var GRAVITY := 1200.0
 
 @export var max_jumps: int = 2
 var jump_count: int = 0
-
 @export var crouch_speed: float = 80.0
 var is_crouching: bool = false
-
 @export var dash_multiplier: float = 2.0
 var is_dashing: bool = false
 
-@onready var sprite = $Sprite2D
+var was_on_wall: bool = false 
 
-func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	else:
-		jump_count = 0
+@onready var animplayer = $Sprite2D
+@onready var jump_sfx = $jump      
+@onready var land_sfx = $land  
+@onready var wall_sfx = $bump
 
+func _get_input():
 	if Input.is_action_just_pressed("ui_up") and jump_count < max_jumps:
-		velocity.y = jump_speed
+		velocity.y = JUMP_SPEED
 		jump_count += 1
 		is_crouching = false
+		land_sfx.stop()
+		jump_sfx.play() 
 
-	if is_on_floor() and Input.is_action_pressed("ui_down"):
-		is_crouching = true
-	else:
-		is_crouching = false
+	if Input.is_action_just_released("ui_up"):
+		land_sfx.play()
 
+	is_crouching = is_on_floor() and Input.is_action_pressed("ui_down")
 	is_dashing = Input.is_action_pressed("ui_accept")
 
-	var current_speed = walk_speed
+	var current_speed = SPEED
 	if is_crouching:
 		current_speed = crouch_speed
 	elif is_dashing:
-		current_speed = walk_speed * dash_multiplier
+		current_speed = SPEED * dash_multiplier
 
-	var direction = 0
-	if Input.is_action_pressed("ui_left"):
-		direction = -1
-		sprite.flip_h = true
-	elif Input.is_action_pressed("ui_right"):
-		direction = 1
-		sprite.flip_h = false
+	var direction := Input.get_axis("ui_left", "ui_right")
+	var animation = "idle"
 
-	velocity.x = direction * current_speed
+	if direction:
+		velocity.x = direction * current_speed
+		
+		if not is_crouching and not is_dashing:
+			animation = "walk right"
+			
+		if direction > 0:
+			animplayer.flip_h = false
+		else:
+			animplayer.flip_h = true
+	else:
+		velocity.x = move_toward(velocity.x, 0, current_speed)
 
 	if not is_on_floor():
 		if velocity.y < 0:
-			sprite.texture = tex_jump
+			animation = "jump"
 		else:
-			sprite.texture = tex_fall
+			animation = "fall"
 	else:
 		if is_dashing:
-			sprite.texture = tex_dash
-			
-			if direction == -1:
-				sprite.flip_h = false
-			elif direction == 1:
-				sprite.flip_h = true
-
+			animation = "dash"
+			if direction < 0:
+				animplayer.flip_h = false
+			elif direction > 0:
+				animplayer.flip_h = true
 		elif is_crouching:
-			sprite.texture = tex_duck
-		else:
-			sprite.texture = tex_stand
+			animation = "duck"
 
+	if animplayer.sprite_frames.has_animation(animation):
+		if animplayer.animation != animation:
+			animplayer.play(animation)
+	else:
+		if animplayer.sprite_frames.has_animation("idle") and animplayer.animation != "idle":
+			animplayer.play("idle")
+
+
+func _physics_process(delta: float) -> void:
+	velocity.y += delta * GRAVITY
+	_get_input()
+	
 	move_and_slide()
+
+	if is_on_floor():
+		jump_count = 0
+
+	if is_on_wall() and not was_on_wall:
+		wall_sfx.play()
+		
+	was_on_wall = is_on_wall()

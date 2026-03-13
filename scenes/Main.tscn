@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dsyfep1odrxje"]
 
 [ext_resource type="PackedScene" uid="uid://ds60n6krsavle" path="res://scenes/Ground.tscn" id="1_elqb8"]
+[ext_resource type="AudioStream" uid="uid://c6oahi32kqu51" path="res://assets/sekuora-funny-bgm-240795.wav" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://3sayjvukgrof" path="res://scenes/Player.tscn" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://cshbm4asv8m84" path="res://scenes/coin.tscn" id="3_0bbpv"]
 
 [node name="Root" type="Node2D" unique_id=918599496]
 
@@ -14,5 +16,36 @@ position = Vector2(856, 324)
 [node name="Ground3" parent="." unique_id=1648397147 instance=ExtResource("1_elqb8")]
 position = Vector2(576, 394)
 
+[node name="bgmusic" type="AudioStreamPlayer2D" parent="." unique_id=827412313]
+position = Vector2(598, 292)
+stream = ExtResource("2_rarhs")
+autoplay = true
+max_distance = 695.0
+attenuation = 2.219139
+
 [node name="Player" parent="." unique_id=992372562 instance=ExtResource("2_rvslj")]
 position = Vector2(598, 292)
+
+[node name="Coin" parent="." unique_id=83965862 instance=ExtResource("3_0bbpv")]
+position = Vector2(88, 172)
+scale = Vector2(0.1, 0.1)
+
+[node name="Coin2" parent="." unique_id=1719471047 instance=ExtResource("3_0bbpv")]
+position = Vector2(224, 100)
+scale = Vector2(0.1, 0.1)
+
+[node name="Coin3" parent="." unique_id=387104266 instance=ExtResource("3_0bbpv")]
+position = Vector2(366, 24.999992)
+scale = Vector2(0.1, 0.1)
+
+[node name="Coin5" parent="." unique_id=702849806 instance=ExtResource("3_0bbpv")]
+position = Vector2(655, 29.00003)
+scale = Vector2(0.1, 0.1)
+
+[node name="Coin6" parent="." unique_id=559589414 instance=ExtResource("3_0bbpv")]
+position = Vector2(802, 102.000015)
+scale = Vector2(0.1, 0.1)
+
+[node name="Coin7" parent="." unique_id=1578625423 instance=ExtResource("3_0bbpv")]
+position = Vector2(928.99994, 162)
+scale = Vector2(0.1, 0.1)
