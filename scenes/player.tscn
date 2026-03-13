@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3sayjvukgrof"]
 
-[ext_resource type="Script" uid="uid://dy0gtownmaref" path="res://Player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://dy0gtownmaref" path="res://scenes/Player.gd" id="1_onrkg"]
 [ext_resource type="AudioStream" uid="uid://cxxvaltptysh" path="res://assets/huuu-mega-knight.wav" id="3_qu4a1"]
 [ext_resource type="AudioStream" uid="uid://bxro4r8v750cb" path="res://assets/freesound_community-knife-thrust-into-wall-7017.wav" id="4_70d11"]
 [ext_resource type="AudioStream" uid="uid://dbgkea1022ixo" path="res://assets/mega-knight-clash-royale.wav" id="5_cw2d6"]
@@ -193,7 +193,7 @@ script = ExtResource("1_onrkg")
 sprite_frames = SubResource("SpriteFrames_qmt83")
 animation = &"player"
 autoplay = "player"
-frame_progress = 0.5840298
+frame_progress = 0.658916
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=67769766]
 position = Vector2(0, 11)
