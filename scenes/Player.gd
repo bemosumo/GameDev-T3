@@ -1,16 +1,15 @@
 extends CharacterBody2D
 
-@export var SPEED := 200.0
-@export var JUMP_SPEED := -400.0
-@export var GRAVITY := 1200.0
-
+@export var speed := 200.0
+@export var jump_speed := -400.0
+@export var gravity := 1200.0
 @export var max_jumps: int = 2
-var jump_count: int = 0
 @export var crouch_speed: float = 80.0
-var is_crouching: bool = false
 @export var dash_multiplier: float = 2.0
-var is_dashing: bool = false
 
+var jump_count: int = 0
+var is_crouching: bool = false
+var is_dashing: bool = false
 var was_on_wall: bool = false
 
 @onready var animplayer = $Sprite2D
@@ -21,7 +20,7 @@ var was_on_wall: bool = false
 
 func _get_input():
 	if Input.is_action_just_pressed("ui_up") and jump_count < max_jumps:
-		velocity.y = JUMP_SPEED
+		velocity.y = jump_speed
 		jump_count += 1
 		is_crouching = false
 		land_sfx.stop()
@@ -33,11 +32,11 @@ func _get_input():
 	is_crouching = is_on_floor() and Input.is_action_pressed("ui_down")
 	is_dashing = Input.is_action_pressed("ui_accept")
 
-	var current_speed = SPEED
+	var current_speed = speed
 	if is_crouching:
 		current_speed = crouch_speed
 	elif is_dashing:
-		current_speed = SPEED * dash_multiplier
+		current_speed = speed * dash_multiplier
 
 	var direction := Input.get_axis("ui_left", "ui_right")
 	var animation = "idle"
@@ -79,7 +78,7 @@ func _get_input():
 
 
 func _physics_process(delta: float) -> void:
-	velocity.y += delta * GRAVITY
+	velocity.y += delta * gravity
 	_get_input()
 
 	move_and_slide()
